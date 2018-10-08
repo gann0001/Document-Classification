@@ -48,36 +48,27 @@ to fit all training, test and validation vectors in same dimensions.
 Encoded the document labels to make categorical values discrete using
 LabelEncoder
 
-**Explanation of Modeling Choice:**
-
-The first natural step in creating basic logistic model will help you to
-understand all of 55 predictor variables and this model was used as a
-stepping stone to other models. In random forest model I found the most
-significant variable in based of mean decrease in accuracy as well as
-contributing to reduction in node impurity. I selected Gradient
-boosting technique as it helps us in finding variable importance plot
-which will help us to see the best predictor variables.
-
+**Split the Data for train, validation, and test**
 I split the training data into three parts with the ration of 65, 15 and
 15, first part is to train the model, second part of the data is to
 validate the model, and third part of the data to test the model. If
 there is some overfitting or underfitting validation and testing will
 perform abnormal
 
-**Modeling Technique and its Strength, Weakness:**
+**Explanation of Modeling Choice:**
 
-
-I tried various models like Logistic Regression, random Forest, Support Vector Machine (SVM), Decision Trees, and K-nearest neighbors so that I can compare model performance metrics for the better accuracy. Hyperparameter tuning definitely help to make model better for random forest and SVM.
+I tried various models like Logistic Regression, random Forest, Support Vector Machine (SVM), Decision Trees, and K-nearest neighbors so that I can compare model performance metrics for the better accuracy. 
 
 **Metric Evaluation for Machine Learning Models:**
 
   >Method  |              Validation Data Accuracy |  Test Data Accuracy
   --------------------- -------------------------- --------------------
-  >Logistic Regression |  0.7152                     
-  >Decision Tree       |  0.7341                     
-  >Random Forest       |  0.8218                     
-  >K Nearest Neighbors |  0.8004                     
+  >Logistic Regression |  0.856              | 		 0.85       
+  >Decision Tree       |  0.77		     |            0.77           
+  >Random Forest       |  0.8318   		|		 0.83                  
+  >K Nearest Neighbors |  0.67			|		 0.66                    
   >Random Forest                                    
+Logistic Regression performed better across all the modes. Hyperparameter tuning definitely help to make model better for random forest and SVM.
 
 **Web Page Development:**
 

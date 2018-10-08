@@ -131,5 +131,5 @@ api.add_resource(Flask_Work, '/', '/penki')
 
 
 if __name__ == '__main__':
-    # Main()
+    Main()
     app.run(host='127.0.0.1', port=4000, debug=True)
