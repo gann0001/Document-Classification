@@ -20,7 +20,7 @@ class Exploration:
     def __init__(self):
         print('Exploration Started')
         # Read Dataset using Pandas
-        self.data = pd.read_csv('shuffled-full-set-hashed.csv')
+        self.data = pd.read_csv('../shuffled-full-set-hashed.csv')
 
         # Create dataframe with column names
         self.df = pd.DataFrame(self.data.values, columns=['label', 'doc'])
@@ -65,10 +65,12 @@ class Modeling:
         creating features from given samples using Term Frequency and Inverse document frequency(TFIDF)
         :return: returning feature vectors
         """
+        print('Vectors')
         vectorizer = TfidfVectorizer()
         tfidf_train = vectorizer.fit_transform(self.X_train)
-        tfidf_test = vectorizer.transform(self.X_test)
         tfidf_valid = vectorizer.transform(self.X_valid)
+        tfidf_test = vectorizer.transform(self.X_test)
+
 
         transformer = TfidfTransformer()
         self.tfidf_train_vectors = transformer.fit_transform(tfidf_train)
@@ -82,6 +84,7 @@ class Modeling:
         training classifier features with target labels
         :param clf: machine learning model
         """
+        print('train classifier')
         self.clf_fit = clf.fit(self.tfidf_train_vectors, self.y_train)
         self.predict_labels()
 
@@ -89,6 +92,7 @@ class Modeling:
         """
         predicting labels for Validation and Testing
         """
+        print('predict labels')
         self.clf_pred_val = self.clf_fit.predict(self.tfidf_valid_vectors)
         self.clf_pred_test = self.clf_fit.predict(self.tfidf_test_vectors)
         self.validate_metrics()
@@ -98,16 +102,16 @@ class Modeling:
 
         :metrics: Confustion matrix, accuracy, accuracy with normalize
         """
-
+        print('validate metrics')
         #Validation Set
         print('Confusion Matrix:\n',confusion_matrix(self.y_valid, self.clf_pred_val))
-        print('Accuracy:\t',accuracy_score(self.y_valid, self.clf_pred_val))
-        print('Accuracy with normalization:\t',accuracy_score(self.y_valid, self.clf_pred_val, normalize=False))
+        print('Accuracy:',accuracy_score(self.y_valid, self.clf_pred_val))
+        print('Accuracy with normalization:',accuracy_score(self.y_valid, self.clf_pred_val, normalize=False))
         print('F1 Score', f1_score(self.y_valid, self.clf_pred_val, average='micro'))
 
         #Test Set
-        print('Confusion Matrix:\n', confusion_matrix(self.y_test, self.clf_pred_val))
-        print('Accuracy:\t', accuracy_score(self.y_test, self.clf_pred_val))
-        print('Accuracy with normalization:\t', accuracy_score(self.y_test, self.clf_pred_val, normalize=False))
-        print('F1 Score', f1_score(self.y_test, self.clf_pred_val, average='micro'))
+        print('Confusion Matrix:\n', confusion_matrix(self.y_test, self.clf_pred_test))
+        print('Accuracy:', accuracy_score(self.y_test, self.clf_pred_test))
+        print('Accuracy with normalization:', accuracy_score(self.y_test, self.clf_pred_test, normalize=False))
+        print('F1 Score:', f1_score(self.y_test, self.clf_pred_test, average='micro'))
 

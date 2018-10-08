@@ -52,7 +52,10 @@ class Main(Resource):
 
         # create train test validation sets
         self.model.create_test_validation_train(self.df)
-        
+
+        # Create Feature vectors using Term Frequency and Inverse document frequency
+        self.model.create_vectors()
+
         # Training Classifiers
 
         # Logistic Regression
@@ -121,5 +124,5 @@ api.add_resource(Flask_Work, '/')
 
 
 if __name__ == '__main__':
-    # Main()
+    Main()
     app.run(host='127.0.0.1', port=4000, debug=True)
