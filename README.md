@@ -1,14 +1,14 @@
-*HeavyWater Document Classification:*
+﻿*HeavyWater Document Classification:*
 
 **Problem Description:**
 
-Problem consists of predicting the type of the document based on hashed
-document data. This problem is multi class classification problem with
+The problem consists of predicting the type of the document based on hashed
+document data. This problem is a multi-class classification problem with
 14 target variables and hashed document words.
 
 **List of assumptions:**
 
-The dataset words are the output of OCR stage of data pipeline. Hence
+The dataset words are the output of the OCR stage of the data pipeline. Hence
 words contain stop words which are also hashed and words in the document
 are in order
 
@@ -41,23 +41,23 @@ There are 45 records where the document content is missing
 
 **Feature Engineering:**
 
-I used TFIDF (Term Frequency Inverse Document Frequency) to create
+I used TFIDF (Term Frequency-Inverse Document Frequency) to create
 feature vectors where is used Sklearn TFIDF vectorizer and transformer
-to fit all training, test and validation vectors in same dimensions.
+to fit all training, test and validation vectors in the same dimensions.
 
 Encoded the document labels to make categorical values discrete using
 LabelEncoder
 
-**Split the Data for train, validation, and test**
+**Split the Data for the train, validation, and test**
 I split the training data into three parts with the ration of 65, 15 and
-15, first part is to train the model, second part of the data is to
-validate the model, and third part of the data to test the model. If
+15, the first part is to train the model, the second part of the data is to
+validate the model, and the third part of the data to test the model. If
 there is some overfitting or underfitting validation and testing will
 perform abnormal
 
 **Explanation of Modeling Choice:**
 
-I tried various models like Logistic Regression, random Forest, Support Vector Machine (SVM), Decision Trees, and K-nearest neighbors so that I can compare model performance metrics for the better accuracy. 
+I tried various models like Logistic Regression, Random Forest, Support Vector Machine (SVM), Decision Trees, and K-nearest neighbors so that I can compare model performance metrics for better accuracy. 
 
 **Metric Evaluation for Machine Learning Models:**
 
@@ -68,13 +68,13 @@ I tried various models like Logistic Regression, random Forest, Support Vector M
   >Random Forest       |  0.8318   		|		 0.83                  
   >K Nearest Neighbors |  0.67			|		 0.66                    
   >Random Forest                                    
-Logistic Regression performed better across all the modes. Hyperparameter tuning definitely help to make model better for random forest and SVM.
+Logistic Regression performed better across all the modes. Hyperparameter tuning definitely helps to make the model better for random forest and SVM.
 
 **Web Page Development:**
 
--   I used Flask which is a micro frame work written in python.
+-   I used Flask which is a microframework written in python.
 
--   Restful API for the web service and it returns json formatted output
+-   Restful API for the web service and it returns JSON formatted output
 
 -   Used HTML/CSS/JavaScript/Bootstrap to develop basic webpage where it
     contains text box and submit button to take an action
@@ -85,7 +85,7 @@ Logistic Regression performed better across all the modes. Hyperparameter tuning
 
 -   I generated a pickle file for trained logistic regression
     classifier(machine\_learning\_lr.pkl) which helped me to deploy in
-    production. I could not upload pickle file in git as it is having
+    production. I could not upload pickle file in GIT as it is having
     more than 100 MB
 
 -   Below is the link for accessing web application hosted in AWS
@@ -109,31 +109,27 @@ Logistic Regression performed better across all the modes. Hyperparameter tuning
 >
 > Python3 classification.py
 
-**Type 2:** To access web application, you may open below link to
+**Type 2:** To access the web application, you may open below link to
     test the document type. This web link contains text box and submit
-    buttion
+    button
 
 > <http://18.191.6.105/>
 
 **Type 3:** As I used REST API, you may execute below command predict document type and confidence
 
 > \$curl http://18.191.6.105/ -d "Document Content= words”
->
-> Note: To run against your webservice you may change the above web
-> service URL
 
 **Challenges Faced:**
 
 1.  As the document content is hashed I could not able to do the feature
-    engineering with best features to train a model
+    engineering with best features to train the model
 
-2.  In order to deploy in AWS, I tried various methods Zappa, Nginix
-    server but I had experienced some difficulties on resolving few
-    errors.
+2.  In order to deploy in AWS, I tried various web servers Zappa, Nginix
+    but I had experienced some difficulties in resolving errors.
 
 **Improvements:**
 
-1.  Hyper Parameter tuning for support vector machine and XG Boost model
+1.  Hyper-Parameter tuning for support vector machine and XG Boost model
     definitely improve the accuracy, but it needs GPU’s to run the
     program
 
