@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Document Classification</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="static/bootstrap.min.css">
+        <link rel="stylesheet" href="static/bootstrap.min.js">
+        <link rel="stylesheet" href="static/jquery.min.js">
+        <link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light-bootstrap/all.min.css" />
+    <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+
+    <script type="text/javascript">
+        jQuery(function ($) {
+        $("#files").shieldUpload();
+        });
+    </script>
+</head>
+
+<body>
+
+<h1> Document Classification</h1>
+
+<form  action="" method="post" role="form">
+    <div class="form-group">
+      <label for="words">Document Content:</label>
+      <input type="text" class="form-control" id="words" name="Document Content">
+    </div>
+    <button type="submit"  class="btn btn-success">Predict</button>
+
+</form>
+
+
+</body>
+</html>
