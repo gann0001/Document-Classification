@@ -22,13 +22,12 @@
 
 <div class='container'>
     <div style="text-align:center;">
-        <h1> Document Classification</h1>
+        <h1 style="color: rgb(0,139,139);"> Document Classification</h1>
     </div>
 </div>
 
 <div class='container'>
     <div style="text-align:center;">
-<!--<img src="{{url_for('static', filename='heavywater.png')}}" width="500" height="333">-->
 <img src="{{url_for('static', filename='heavywater1.png')}}" >
     </div>
 </div>
@@ -36,19 +35,13 @@
 <form action="" method="post" role="form">
     <div class="container">
         <div style="text-align:center;" class="form-group">
-            <label for="words">Document Content:</label>
-            <input type="text" class="form-control" id="words" name="Document Content" required>
+            <!--<label for="words">Document Content:</label>-->
+            <input type="text" class="form-control" id="words" name="Document Content" placeholder="Enter Document Data Here" required>
             <br>
             <button type="submit" class="btn btn-success">Predict</button>
         </div>
     </div>
 </form>
-
-<div class='container'>
-    <div style="text-align:center;">
-<img src="{{url_for('static', filename='heavywater.png')}}">
-    </div>
-</div>
 
 
 </body>

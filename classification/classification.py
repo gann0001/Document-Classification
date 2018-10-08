@@ -97,13 +97,16 @@ class Flask_Work(Resource):
 
         :return: Confidence and Label Type
         """
-        f = open('../../machine_learning.pkl', 'rb')
-        vectorizer, transformer, logistic_regression_clf = pickle.load(f), pickle.load(f), pickle.load(f)
+        f = open('machine_learning_lr.pkl', 'rb')
+        logistic_regression_clf = pickle.load(f)
+        tfidf = TfidfVectorizer()
+        transformer = TfidfTransformer()
         l_map = {k: v for k, v in enumerate(self.labels)}
         words = request.form['Document Content']
         document = pd.DataFrame([words])
         document.columns = ["doc"]
-        tfidf_test = vectorizer.transform(document['doc'])
+        print(document['doc'])
+        tfidf_test = tfidf.transform(document['doc'])
         tfidf_test_vector = transformer.fit_transform(tfidf_test)
         prediction = logistic_regression_clf.predict(tfidf_test_vector)
         confidence_interval = logistic_regression_clf.predict_proba(tfidf_test_vector)
@@ -114,15 +117,19 @@ class Flask_Work(Resource):
                 calculate_confidence.append(each1/total)
         print(l_map[prediction[0]])
         confidence = max(calculate_confidence)
-        # return '<h1> Your document is of type {} '.format(l_map[prediction[0]])
+        value = {
+            'Confidence': confidence,
+            'Label': 'The Type of the document is {}'.format(l_map[prediction[0]])
+        }
+
         return {
             'Confidence': confidence,
             'Label': 'The Type of the document is {}'.format(l_map[prediction[0]])
         }
 
-api.add_resource(Flask_Work, '/')
+api.add_resource(Flask_Work, '/', '/penki')
 
 
 if __name__ == '__main__':
-    Main()
+    # Main()
     app.run(host='127.0.0.1', port=4000, debug=True)
