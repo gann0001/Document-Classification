@@ -65,7 +65,7 @@ class Modeling:
         creating features from given samples using Term Frequency and Inverse document frequency(TFIDF)
         :return: returning feature vectors
         """
-        print('Vectors')
+        print('Vectors in progress')
         vectorizer = TfidfVectorizer()
         tfidf_train = vectorizer.fit_transform(self.X_train)
         tfidf_valid = vectorizer.transform(self.X_valid)
@@ -84,7 +84,7 @@ class Modeling:
         training classifier features with target labels
         :param clf: machine learning model
         """
-        print('train classifier')
+        print('training classifier')
         self.clf_fit = clf.fit(self.tfidf_train_vectors, self.y_train)
         self.predict_labels()
 
@@ -92,7 +92,7 @@ class Modeling:
         """
         predicting labels for Validation and Testing
         """
-        print('predict labels')
+        print('predicting labels')
         self.clf_pred_val = self.clf_fit.predict(self.tfidf_valid_vectors)
         self.clf_pred_test = self.clf_fit.predict(self.tfidf_test_vectors)
         self.validate_metrics()
@@ -102,7 +102,7 @@ class Modeling:
 
         :metrics: Confustion matrix, accuracy, accuracy with normalize
         """
-        print('validate metrics')
+        print('Metrics')
         #Validation Set
         print('Confusion Matrix:\n',confusion_matrix(self.y_valid, self.clf_pred_val))
         print('Accuracy:',accuracy_score(self.y_valid, self.clf_pred_val))
