@@ -13,6 +13,8 @@ from sklearn import svm
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn import preprocessing
+from sklearn.metrics import f1_score
+
 
 class Exploration:
     def __init__(self):
@@ -35,7 +37,6 @@ class Exploration:
         le = preprocessing.LabelEncoder()
         self.df['label'] = le.fit_transform(self.df['label'])
         return self.df, self.labels, self.docs
-
 
 
 class Modeling:
@@ -95,12 +96,18 @@ class Modeling:
     def validate_metrics(self):
         """
 
-        :metrics: Confustion matrix and accuracy
+        :metrics: Confustion matrix, accuracy, accuracy with normalize
         """
-        print(confusion_matrix(self.y_valid, self.clf_pred_val))
-        print(accuracy_score(self.y_valid, self.clf_pred_val))
-        print(accuracy_score(self.y_valid, self.clf_pred_val, normalize=False))
-        print(confusion_matrix(self.y_test, self.clf_pred_test))
-        print(accuracy_score(self.y_test, self.clf_pred_test))
-        print(accuracy_score(self.y_test, self.clf_pred_test, normalize=False))
+
+        #Validation Set
+        print('Confusion Matrix:\n',confusion_matrix(self.y_valid, self.clf_pred_val))
+        print('Accuracy:\t',accuracy_score(self.y_valid, self.clf_pred_val))
+        print('Accuracy with normalization:\t',accuracy_score(self.y_valid, self.clf_pred_val, normalize=False))
+        print('F1 Score', f1_score(self.y_valid, self.clf_pred_val, average='micro'))
+
+        #Test Set
+        print('Confusion Matrix:\n', confusion_matrix(self.y_test, self.clf_pred_val))
+        print('Accuracy:\t', accuracy_score(self.y_test, self.clf_pred_val))
+        print('Accuracy with normalization:\t', accuracy_score(self.y_test, self.clf_pred_val, normalize=False))
+        print('F1 Score', f1_score(self.y_test, self.clf_pred_val, average='micro'))
 

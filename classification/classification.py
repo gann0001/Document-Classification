@@ -1,18 +1,17 @@
 import pandas as pd
 import numpy as np
-from sklearn import tree
+from sklearn import tree, preprocessing
 import pandas as pd
 import numpy as np
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.feature_extraction.text import TfidfTransformer
+from sklearn.feature_extraction.text import TfidfVectorizer, TfidfTransformer
 from sklearn.naive_bayes import GaussianNB
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn import svm
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
-from sklearn import preprocessing
+from sklearn.svm import SVC
+from sklearn.ensemble import BaggingClassifier, RandomForestClassifier
+from sklearn.multiclass import OneVsRestClassifier
 import pickle
 from data_exploration import Exploration, Modeling
 from sklearn.linear_model import LogisticRegression
@@ -36,14 +35,15 @@ class TextFieldForm(FlaskForm):
 class Main(Resource):
     def __init__(self):
         print('Executing Main Funciton')
-        # self.exp = Exploration()
-        # self.model = Modeling()
+        self.exp = Exploration()
+        self.model = Modeling()
         self.create_models()
         self.labels = ['APPLICATION', 'BILL', 'BILL BINDER', 'BINDER', 'CANCELLATION NOTICE', 'CHANGE ENDORSEMENT',
                        'DECLARATION', 'DELETION OF INTEREST', 'EXPIRATION NOTICE', 'INTENT TO CANCEL NOTICE',
                        'NON-RENEWAL NOTICE', 'POLICY CHANGE', 'REINSTATEMENT NOTICE', 'RETURNED CHECK']
 
     def create_models(self):
+
         # Remove NA in Dataset
         self.df = self.exp.remove_na()
 
@@ -52,13 +52,27 @@ class Main(Resource):
 
         # create train test validation sets
         self.model.create_test_validation_train(self.df)
+        
+        # Training Classifiers
 
-        # Create vectors using tfidf vectorizer
-        self.model.create_vectors()
-
-        # train classifiers
+        # Logistic Regression
         self.clf = LogisticRegression(random_state=42, solver='lbfgs', multi_class='multinomial', C=14)
         self.model.train_classifier(self.clf)
+
+        # Decision Tree
+        # self.clf = tree.DecisionTreeClassifier()
+        # self.model.train_classifier(self.clf)
+
+        # SVM
+        # n_estimators = 10
+        # clf = OneVsRestClassifier(
+        #     BaggingClassifier(SVC(kernel='linear', probability=True), max_samples=1.0 / n_estimators,
+        #                       n_estimators=n_estimators))
+        # self.model.train_classifier(self.clf)
+
+        # K-Nearest Neighbors
+        # knn = KNeighborsClassifier(n_neighbors=1)
+        # self.model.train_classifier(self.clf)
 
 
 class Flask_Work(Resource):
@@ -68,16 +82,22 @@ class Flask_Work(Resource):
                        'NON-RENEWAL NOTICE', 'POLICY CHANGE', 'REINSTATEMENT NOTICE', 'RETURNED CHECK']
 
     def get(self):
+        """
+        This method will render the index.html page
+        :return: return to index.html
+        """
         headers = {'Content-Type': 'text/html'}
         return make_response(render_template('index.html'), 200, headers)
 
     def post(self):
-        f = open('../machine_learning.pkl', 'rb')
+        """
+
+        :return: Confidence and Label Type
+        """
+        f = open('../../machine_learning.pkl', 'rb')
         vectorizer, transformer, logistic_regression_clf = pickle.load(f), pickle.load(f), pickle.load(f)
-        print('in vect')
         l_map = {k: v for k, v in enumerate(self.labels)}
         words = request.form['Document Content']
-        print(words)
         document = pd.DataFrame([words])
         document.columns = ["doc"]
         tfidf_test = vectorizer.transform(document['doc'])
