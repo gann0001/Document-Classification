@@ -114,4 +114,3 @@ class Modeling:
         print('Accuracy:', accuracy_score(self.y_test, self.clf_pred_test))
         print('Accuracy with normalization:', accuracy_score(self.y_test, self.clf_pred_test, normalize=False))
         print('F1 Score:', f1_score(self.y_test, self.clf_pred_test, average='micro'))
-

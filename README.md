@@ -33,7 +33,7 @@ There are 45 records where the document content is missing
 
 
 >$df.isna().sum()
-
+>
 >label 0
 >doc 45
 
@@ -52,9 +52,9 @@ LabelEncoder
 
 The first natural step in creating basic logistic model will help you to
 understand all of 55 predictor variables and this model was used as a
-stepping stone to other models. In random forest model we found the most
+stepping stone to other models. In random forest model I found the most
 significant variable in based of mean decrease in accuracy as well as
-contributing to reduction in node impurity. We selected Gradient
+contributing to reduction in node impurity. I selected Gradient
 boosting technique as it helps us in finding variable importance plot
 which will help us to see the best predictor variables.
 
@@ -66,35 +66,17 @@ perform abnormal
 
 **Modeling Technique and its Strength, Weakness:**
 
-Logistic regression helps to understand the coefficients and
-significance of the variables. The exponential of coefficients
-corresponds to odd ratios for the given factor. Logistic regression
-requires that all variables are independent of each other if there is
-any correlation between variables and then the model will tend to
-overweight the significance of those variables
 
-Random forest runs fast, and it is good at dealing with unbalanced data.
-To do classification with Random Forest, it’s cannot predict beyond the
-range in the training data, and that there may be chances of over-fit
-datasets that are particularly noisy. But the best test of any algorithm
-is how well it works upon your own data set. We also chose this model
-because it helps us in finding the feature importance plot which is
-bases for the understanding the features and coming up with performing
-feature engineering.
-
-I tried other various models like Support Vector Machine (SVM), Decision
-Trees, and K-nearest neighbors so that I can compare model performance
-metrics for the better accuracy. Hyperparameter tuning definitely help
-to make model better for random forest and SVM.
+I tried various models like Logistic Regression, random Forest, Support Vector Machine (SVM), Decision Trees, and K-nearest neighbors so that I can compare model performance metrics for the better accuracy. Hyperparameter tuning definitely help to make model better for random forest and SVM.
 
 **Metric Evaluation for Machine Learning Models:**
 
   >Method  |              Validation Data Accuracy |  Test Data Accuracy
   --------------------- -------------------------- --------------------
-  >Logistic Regression   0.7152                     
-  >Decision Tree         0.7341                     
-  >Random Forest         0.8218                     
-  >K Nearest Neighbors   0.8004                     
+  >Logistic Regression |  0.7152                     
+  >Decision Tree       |  0.7341                     
+  >Random Forest       |  0.8218                     
+  >K Nearest Neighbors |  0.8004                     
   >Random Forest                                    
 
 **Web Page Development:**
@@ -127,11 +109,11 @@ to make model better for random forest and SVM.
 > classification folder. Please let me know if you don’t have access.
 >
 > https://drive.google.com/file/d/1Q4u2sk9KXsmTkVhOtF8I-iBSQs8tzxgz/view?usp=sharing
-
+>
 >**Step2:** Install requirements.txt file
-
+>
 >Pip3 install -r requirements.txt
-
+>
 > **Step3:** Run below command to execute the python file
 >
 > Python3 classification.py
@@ -165,10 +147,10 @@ to make model better for random forest and SVM.
     program
 
 2.  Removing stop words, Stemming and Lemmatization will also improve
-    the accuracy if we know actual data.
+    the accuracy if I know the actual data.
 
 3.  TFIDF vector created big dimension vector where most of the columns
-    are zero if we delete the most common columns, again we can make
+    are zero if I delete the most common columns, again I can make
     model smarter. But handling huge dimension vectors again we need
     GPU’s.
 
