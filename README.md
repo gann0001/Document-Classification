@@ -1,10 +1,12 @@
+*HeavyWater Document Classification:*
+
 **Problem Description:**
 
 Problem consists of predicting the type of the document based on hashed
 document data. This problem is multi class classification problem with
 14 target variables and hashed document words.
 
-**List of major concerns/assumptions:**
+**List of assumptions:**
 
 The dataset words are the output of OCR stage of data pipeline. Hence
 words contain stop words which are also hashed and words in the document
@@ -20,8 +22,6 @@ Below is the count of documents for each document label. I observed BILL
 and POLICY Change contains a greater number of documents whereas INTENT
 TO CANCEL NOTICE and APPLICATION has a smaller number of documents
 
-![](media/image2.png){width="6.027777777777778in"
-height="5.590982064741907in"}
 
 As the document content is hashed hence I could not perform more
 operations on real data like removing stop words, stemming, and
@@ -31,11 +31,11 @@ lemmatization.
 
 There are 45 records where the document content is missing
 
-\$df.isna().sum()
 
-label 0
+>$df.isna().sum()
 
-doc 45
+>label 0
+>doc 45
 
 **Analysis Plan:**
 
@@ -89,13 +89,13 @@ to make model better for random forest and SVM.
 
 **Metric Evaluation for Machine Learning Models:**
 
-  Method                Validation Data Accuracy   Test Data Accuracy
+  >Method  |              Validation Data Accuracy |  Test Data Accuracy
   --------------------- -------------------------- --------------------
-  Logistic Regression   0.7152                     
-  Decision Tree         0.7341                     
-  Random Forest         0.8218                     
-  K Nearest Neighbors   0.8004                     
-  Random Forest                                    
+  >Logistic Regression   0.7152                     
+  >Decision Tree         0.7341                     
+  >Random Forest         0.8218                     
+  >K Nearest Neighbors   0.8004                     
+  >Random Forest                                    
 
 **Web Page Development:**
 
@@ -121,29 +121,28 @@ to make model better for random forest and SVM.
 
 **Execution Instructions:**
 
-1.  **Type 1 Simple Program execution:**
+**Type 1 Simple Program execution:**
 
 > **Step1**: Download the pickle file from below location and store in
 > classification folder. Please let me know if you don’t have access.
 >
 > https://drive.google.com/file/d/1Q4u2sk9KXsmTkVhOtF8I-iBSQs8tzxgz/view?usp=sharing
 
-**Step2:** Install requirements.txt file
+>**Step2:** Install requirements.txt file
 
-Pip3 install -r requirements.txt
+>Pip3 install -r requirements.txt
 
 > **Step3:** Run below command to execute the python file
 >
 > Python3 classification.py
 
-1.  **Type 2:** To access web application, you may open below link to
+**Type 2:** To access web application, you may open below link to
     test the document type. This web link contains text box and submit
     buttion
 
 > <http://18.191.6.105/>
 
-1.  As I used REST API, you may execute below command predict document
-    type and confidence
+**Type 3:** As I used REST API, you may execute below command predict document type and confidence
 
 > \$curl http://18.191.6.105/ -d "Document Content= words”
 >
@@ -172,5 +171,6 @@ Pip3 install -r requirements.txt
     are zero if we delete the most common columns, again we can make
     model smarter. But handling huge dimension vectors again we need
     GPU’s.
+
 
 
